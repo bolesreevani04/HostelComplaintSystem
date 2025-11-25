@@ -1,6 +1,13 @@
 from django.shortcuts import render
 from .models import Complaint
 
+# Homepage view
+def home(request):
+    # This will render your homepage template
+    return render(request, 'complaints/home.html')
+
+
+# Submit complaint view
 def submit_complaint(request):
     message = None
     status = None
@@ -19,3 +26,4 @@ def submit_complaint(request):
             status = "error"
 
     return render(request, 'complaints/complaint_form.html', {"message": message, "status": status})
+
