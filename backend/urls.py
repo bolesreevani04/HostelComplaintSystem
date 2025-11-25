@@ -15,10 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from complaints import views
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('complaints.urls')),
+    path('submit/', views.submit_complaint, name='submit_complaint'),
+    
+    # Option A: Redirect root URL to /submit/
+    path('', RedirectView.as_view(url='/submit/', permanent=False)),
+    
+    
 ]
-
