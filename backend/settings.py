@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,13 +77,17 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hostel_db',       # your DB name
-        'USER': 'root',            # MySQL user
-        'PASSWORD': 'Nannavani@123',  
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': os.environ.get('DB_NAME', 'hostel_db'),       # fallback to local DB
+        'USER': os.environ.get('DB_USER', 'root'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
     }
 }
+SECRET_KEYECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret-key')
+
+# Debug mode from environment variable
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 
 
