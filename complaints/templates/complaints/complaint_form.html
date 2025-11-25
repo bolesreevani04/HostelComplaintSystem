@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Complaint Raiser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://www.targetadmission.com/img/colleges/newc/8216-776733.jpg'); /* Add your background image here */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Hide overflow to prevent scrollbars */
+        }
+        .container {
+            background:rgba(255,255,255,0.3); /* No background */
+            padding: 20px;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center; /* Center-align text */
+            position: relative; /* Position relative to contain moving images */
+            z-index: 1; /* Ensure form is above moving images */
+        }
+        .logo {
+            width: 100px; /* Set the width of the logo */
+            height: auto;
+            margin-bottom: 20px; /* Space below the logo */
+        }
+        h1 {
+            margin-top: 0;
+            color: black; /* White text color */
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left; /* Align form labels and inputs to the left */
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: black; /* White text color */
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: show; /* No border */
+            border-bottom: 3px solid black; /* White bottom border */
+            background: none; /* No background */
+            color: black; /* White text color */
+        }
+        .form-group button {
+            background-color:black; /* Semi-transparent background */
+            color: white; /* White text color */
+            border: show;
+            padding: 10px 15px;
+            border-radius: 25%;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: rgba(255, 255, 255, 0.3); /* Slightly more opaque background on hover */
+        }
+        .message {
+            display: none;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .success {
+            background-color: rgba(212, 237, 218, 0.7); /* Semi-transparent success message */
+            color: #155724;
+        }
+        .error {
+            background-color: rgba(248, 215, 218, 0.7); /* Semi-transparent error message */
+            color: #721c24;
+        }
+        /* Moving Images */
+        .moving-image {
+            position: absolute;
+            width: 150px; /* Adjust the size of the moving images */
+            height: auto;
+            animation: move 10s linear infinite;
+            z-index: 0;
+	    border-radius: 50%; /* Behind the form */
+        }
+        @keyframes move {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(200px, 100px);
+            }
+            50% {
+                transform: translate(400px, -100px);
+            }
+            75% {
+                transform: translate(-200px, -200px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+.ticker-container {
+            position: auto;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255,255,255,0.3);
+            color: black;
+            padding: 10px 0;
+            overflow: hidden;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            animation: ticker 5s linear infinite;
+        }
+
+        @keyframes ticker {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://th.bing.com/th?id=OIP.IQriVmT5J_UCzTXqdancDQAAAA&w=181&h=181&c=8&rs=1&qlt=90&o=6&dpr=1.6&pid=3.1&rm=2.jpg" alt="Hostel Logo" class="logo"> 
+<div class="ticker-container">
+        <div class="ticker-content">
+            <p>Your Voice Matters: Speak Up for a Better Hostel!</p>
+        </div>
+    </div>
+
+        <h1>Hostel Complaint Raiser</h1>
+        <form id="complaintForm" method="POST" action="/submit/">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="category"><h3>Complaint Category</h3></label>
+        <input type="text" id="category" name="category" placeholder="e.g., Cleanliness, Maintenance" required>
+    </div>
+    <div class="form-group">
+        <label for="description"><h3>Complaint Description</h3></label>
+        <textarea id="description" name="description" rows="5" placeholder="Describe your complaint here" required></textarea>
+    </div>
+    <div class="form-group">
+        <button type="submit">Submit Complaint</button>
+    </div>
+
+    {% if message %}
+        <div class="message {{ status }}">{{ message }}</div>
+    {% endif %}
+</form>
+
+
+    </div>
+
+    <!-- Moving Images -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/WiFi_Logo.svg/1200px-WiFi_Logo.svg.png" alt="Moving Image 1" class="moving-image" style="top: 0; left: 0; animation-delay: 0s;">
+    <img src="https://thumbs.dreamstime.com/z/smiley-icon-red-tongue-concept-grin-smile-world-day-language-great-food-enjoy-foodie-flavor-social-network-emoji-tease-141241838.jpg" alt="Moving Image 2" class="moving-image" style="top: 50%; left: 0; animation-delay: 2s;">
+    <img src="https://th.bing.com/th/id/OIP.Tspv7DDpzU8tSwFo4fSlkgHaH_?rs=1&pid=ImgDetMain" alt="Moving Image 3" class="moving-image" style="top: 100%; left: 0; animation-delay: 4s;">
+    <img src="https://cdn.vectorstock.com/i/500p/81/17/cleaning-girl-115-vector-49868117.jpg" alt="Moving Image 4" class="moving-image" style="top: 0; right: 0; animation-delay: 0s;">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXzdvdxTjXn8pZsw25mf0_e1nT_Wr-m3HK8Q&s" alt="Moving Image 5" class="moving-image" style="top: 50%; right: 0; animation-delay: 2s;">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfRcvSTrkd5Hdtr6xGu5qIPjs-H4ulzplT8w&s" alt="Moving Image 6" class="moving-image" style="top: 100%; right: 0; animation-delay: 4s;">
+
+
+    
+</html>
